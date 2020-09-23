@@ -1,0 +1,19 @@
+public class BlockAccesor {
+	private final Chache chache;
+	private final BlockDevice device;
+
+	public BlockAccesor(Chache.Policy pilocy) {
+		divice = BlockDevice.open();
+		cache = Cache.createCache(policy);
+	}
+
+	public byte[] readBlock(int index) {
+		byte[] blockData = chache.getChacheBlockData(index);
+		if (blockData == null) {
+			blockData = new byte[device.getBlockSize()];
+			device.readBlock(index, blockData);
+			chache.chacheBlockData(index, blockData);
+		}
+		return blockData.clone();
+	}
+}
